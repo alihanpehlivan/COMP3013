@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h1 id="demo"></h1>
+
+<script>
+function renderApp() {
+  document.getElementById("demo").innerHTML = "Welcome!";
+}
+
+function renderLogin() {
+  document.getElementById("demo").innerHTML = "Please log in";
+}
+
+let authenticated = false;
+
+authenticated ? renderApp() : renderLogin();
+
+</script>
+<p>Try changing the "authenticated" variable to false, and run the code to see what happens</p>
+
+</body>
+</html>

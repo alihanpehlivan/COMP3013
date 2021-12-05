@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Arrow Function</h1>
+
+<p>A demonstration of a simple arrow function.</p>
+<p id="demo"></p>
+
+<h2>Implicit Return</h2>
+<p>The arrow function expects a return value, and returns the value by default, without the return keyword</p>
+
+<p id = "demo2"></p>
+
+<h3>Arrow Function</h3>
+<p>A demonstration of an arrow function in one line, with parameters.</p>
+<p id = "Arrow"></p>
+
+<h4>Arrow Function</h4>
+<p>Skip the parentheses when you have only one parameter.</p>
+<p id = "ArrowSkip"></p>
+
+<script>
+hello = () => {
+return "Hello World";
+}
+
+helloTwo = () => "HELLO WORLD";
+
+helloArrow = (val) => "Hello " + val;
+
+helloSkip = val => "Hello " + val;
+
+
+document.getElementById("demo").innerHTML = hello();
+document.getElementById("demo2").innerHTML = helloTwo();
+document.getElementById("Arrow").innerHTML = helloArrow("Martin");
+document.getElementById("ArrowSkip").innerHTML = helloSkip("Martin");
+</script>
+
+</body>
+</html>
