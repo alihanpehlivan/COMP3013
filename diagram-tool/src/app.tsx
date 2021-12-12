@@ -1,8 +1,3 @@
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -48,7 +43,7 @@ export default function App() {
   return (
     <Grid container sx={{ height: '100vh' }}>
     <CssBaseline />
-      <Grid container component="main" spacing={2}>
+      <Grid container component="main">
         <Grid item xs={2}>
             <Menu/>
         </Grid>

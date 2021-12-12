@@ -1,12 +1,26 @@
 import ReactDOM from 'react-dom';
 import App from './app';
 
-// MUI
-import Grid from '@mui/material/Grid';
-import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    background: {
+      default: '#2f2f2f',
+      paper: '#2f2f2f',
+    },
+    primary: {
+      main: "#2f2f2f"
+    },
+    secondary: {
+      main: "#006bb2"
+    },
+    text: {
+      primary: "#ffffff",
+      secondary: "#bfbfbf"
+    },
+  },
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

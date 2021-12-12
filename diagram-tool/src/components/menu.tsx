@@ -1,10 +1,4 @@
 import Paper from '@mui/material/Paper';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
@@ -18,39 +12,39 @@ import Typography from '@mui/material/Typography';
 
 export default function Menu() {
   return (
-    <Paper sx={{ width: 320, maxWidth: '100%' }}>
+    <Paper>
       <MenuList>
         <MenuItem>
           <ListItemIcon>
-            <ContentCut fontSize="small" />
+            <ContentCut fontSize="small" color="secondary"/>
           </ListItemIcon>
           <ListItemText>Cut</ListItemText>
           <Typography variant="body2" color="text.secondary">
-            ?X
+            X
           </Typography>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <ContentCopy fontSize="small" />
+            <ContentCopy fontSize="small" color="secondary"/>
           </ListItemIcon>
           <ListItemText>Copy</ListItemText>
           <Typography variant="body2" color="text.secondary">
-            ?C
+            C
           </Typography>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <ContentPaste fontSize="small" />
+            <ContentPaste fontSize="small" color="secondary"/>
           </ListItemIcon>
           <ListItemText>Paste</ListItemText>
           <Typography variant="body2" color="text.secondary">
-            ?V
+            V
           </Typography>
         </MenuItem>
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <Cloud fontSize="small" />
+            <Cloud fontSize="small" color="secondary"/>
           </ListItemIcon>
           <ListItemText>Web Clipboard</ListItemText>
         </MenuItem>
