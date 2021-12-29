@@ -23,9 +23,15 @@ export class Application {
 		let port2 = node2.addInPort('In');
 		node2.setPosition(400, 100);
 
+		//(3-C) create another node
+		var node3 = new SRD.DefaultNodeModel('RED', 'rgb(255,0,0)');
+		let port3 = node3.addInPort('C');
+		node3.setPosition(600,100);
+
 		// link the ports
 		let link1 = port.link(port2);
-		this.activeModel.addAll(node1, node2, link1);
+		let link2 = port2.link(port3);
+		this.activeModel.addAll(node1, node2,node3,link1, link2);
 	}
 
 	public getActiveDiagram(): SRD.DiagramModel {
