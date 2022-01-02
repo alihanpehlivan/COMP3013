@@ -18,6 +18,10 @@ function Print(){
   alert("TEMPLATE");
 }
 
+function loadDocs(){
+  window.location.href = "documentation.html";
+}
+
 
 export default function LeftMenu() {
   return (
@@ -39,7 +43,7 @@ export default function LeftMenu() {
           <ListItemText>Export as image</ListItemText>
         </MenuItem>
         <MenuItem>
-        <a href="documentation.html"><ListItemText color='primary'>Documentation</ListItemText></a>
+        <ListItem onClick={loadDocs}>Documentation</ListItem>
         </MenuItem>
         <MenuItem>
         <ListItem onClick={Print}>Create Template</ListItem>
