@@ -10,6 +10,13 @@
   background: lightblue;
   background-clip: border-box; 
     }
+
+    #backgroundBoxInput{
+        border: 10px;
+  padding: 15px;
+  background: lightblue;
+  background-clip: border-box; 
+    }
 </style>
 <body>
 
@@ -21,6 +28,16 @@
     <a href="#Finite State Machine">Finite State Machine</a>
     </div>
 
+<div id="backgroundBoxInput">
+    <p>Enter Node Data</p>
+    <input id="textNode" text="text">
+    <p>Enter Node Colour</p>
+    <input id="colourNode" text="text">
+    <button onClick="getNodeData()">Click Here</button>
+
+
+</div>
+
 
 
     <h2>Finite State Machine</h2>
@@ -31,9 +48,16 @@
 
     <h3>Behaviour Tree</h3>
     <p><a name="Behaviour Tree"></a>Behaviour Tree</p>
-
-
-
-
 </body>
+
+<script>
+
+    function getNodeData()
+    {
+        var name = document.getElementById("textNode").value;
+        var colour = document.getElementById("colourNode").value;
+        alert(name + " " +  colour);
+
+    }
+</script>
 </html>
