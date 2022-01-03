@@ -20,6 +20,9 @@ function loadDocs(){
 }
 
 
+
+
+
 export default function LeftMenu() {
   return (
     <Box>
@@ -27,7 +30,7 @@ export default function LeftMenu() {
       <Box sx={{ m: 3 }}>
       <TrayItemWidget model={{ type: 'in' }} name="In Node" color="rgb(192,255,0)" />
       <TrayItemWidget model={{ type: 'out' }} name="Out Node" color="rgb(0,192,255)" />
-      <TrayItemWidget model={{type: 'in'}} name="In Node" color="rgb(255,0,0)"/>
+      <TrayItemWidget model={{type: 'A'}} name="In Node" color="rgb(255,0,0)"/>
 	  <TrayItemWidget model={{ type: 'E' }} name="Out Node" color="rgb(255,255,0)"/>
       <TrayItemWidget model={{ type: 'V' }} name="In Node" color="rgb(255,127,0)" />
       <TrayItemWidget model={{ type: 'S' }} name="In Node" color="rgb(160,32,240)" />
