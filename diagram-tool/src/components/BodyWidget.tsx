@@ -40,28 +40,29 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 
 							if (data.type === 'in') 
 							{
-								var name = 'Node';
-								var colour = 'rgb(192,255,0)'
+								//var name = 'Node';
+								//var colour = 'rgb(192,255,0)';
+								var defaultPort = 'Default';
 								var port = 'CLASS';
 								var port2 = 'ACTORS';
 								var port3 = 'DELETE';
-								node = new DefaultNodeModel(name + (nodesCount + 1), colour);
-								node.addInPort('In');
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(192,255,0)');
+								node.addInPort(defaultPort);
 								node.addInPort(port);
 								node.addInPort(port2);
 								node.addInPort(port3);
 
-								clickMe(name, colour);
+								//clickMe(name, colour);
 							} 
 							else if(data.type === 'out') 
 							{
 								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(0,192,255)');
 								node.addOutPort('Out');
 							}
-							else if (data.type === 'C')
+							else if (data.type === 'A')
 							{
 								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(255,0,0)');
-								node.addInPort('C');
+								node.addInPort('A');
 							}
 							else if(data.type === 'E')
 							{
