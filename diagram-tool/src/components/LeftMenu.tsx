@@ -14,9 +14,6 @@ import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 
 
-function Print(){
-  alert("TEMPLATE");
-}
 
 function loadDocs(){
   window.location.href = "documentation.html";
@@ -31,6 +28,9 @@ export default function LeftMenu() {
       <TrayItemWidget model={{ type: 'in' }} name="In Node" color="rgb(192,255,0)" />
       <TrayItemWidget model={{ type: 'out' }} name="Out Node" color="rgb(0,192,255)" />
       <TrayItemWidget model={{type: 'in'}} name="In Node" color="rgb(255,0,0)"/>
+	  <TrayItemWidget model={{ type: 'E' }} name="Out Node" color="rgb(255,255,0)"/>
+      <TrayItemWidget model={{ type: 'V' }} name="In Node" color="rgb(255,127,0)" />
+      <TrayItemWidget model={{ type: 'S' }} name="In Node" color="rgb(160,32,240)" />
       </Box>
       <MenuList>
         <Divider />
@@ -44,9 +44,6 @@ export default function LeftMenu() {
         </MenuItem>
         <MenuItem>
         <ListItem onClick={loadDocs}>Documentation</ListItem>
-        </MenuItem>
-        <MenuItem>
-        <ListItem onClick={Print}>Create Template</ListItem>
         </MenuItem>
       </MenuList>
     </Box>); 
