@@ -13,6 +13,12 @@ export interface BodyWidgetProps {
 	app: Application;
 }
 
+function clickMe(name, colour){
+	alert("Hello World");
+	alert(name);
+	alert(colour)
+}
+
 export class BodyWidget extends React.Component<BodyWidgetProps> {
 	render() {
 		return (
@@ -32,12 +38,43 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 
 							var node: DefaultNodeModel = null;
 
-							if (data.type === 'in') {
-								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(192,255,0)');
+							if (data.type === 'in') 
+							{
+								var name = 'Node';
+								var colour = 'rgb(192,255,0)'
+								var port = 'CLASS';
+								var port2 = 'ACTORS';
+								var port3 = 'DELETE';
+								node = new DefaultNodeModel(name + (nodesCount + 1), colour);
 								node.addInPort('In');
-							} else {
+								node.addInPort(port);
+								node.addInPort(port2);
+								node.addInPort(port3);
+
+								clickMe(name, colour);
+							} 
+							else if(data.type === 'out') 
+							{
 								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(0,192,255)');
 								node.addOutPort('Out');
+							}
+							else if (data.type === 'C')
+							{
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(255,0,0)');
+								node.addInPort('C');
+							}
+							else if(data.type === 'E')
+							{
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(255,255,0)');
+								node.addOutPort('E');
+							}
+							else if(data.type === 'V')
+							{
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(255,127,0)');
+								node.addInPort('V');
+							}else{
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(160,32,240)');
+								node.addOutPort('S');
 							}
 
 							var point = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
