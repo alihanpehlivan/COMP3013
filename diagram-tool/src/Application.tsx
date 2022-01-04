@@ -1,7 +1,12 @@
 import * as SRD from '@projectstorm/react-diagrams';
 import { ConnectionNodeModel } from './components/ConnectionNodeModel';
 import { ConnectionNodeFactory } from './components/ConnectionNodeFactory';
+import { SimplePortFactory } from 'C:\Users\danie\Desktop\COMP3013\diagram-tool\src\components\SimplePortFactory';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
+
 import { ConnectionPortModel } from './components/ConnectionPortModel';
+import createEngine, { DefaultNodeModel, DiagramModel, PortModelAlignment } from '@projectstorm/react-diagrams';
+
 
 export class Application {
 	protected activeModel: SRD.DiagramModel;
@@ -9,6 +14,10 @@ export class Application {
 
 	constructor() {
 		this.diagramEngine = SRD.default();
+		this.diagramEngine.getPortFactories()
+		.registerFactory(new SimplePortFactory('connection', (config) => new ConnectionPortModel(PortModelAlignment.LEFT)));
+		this.diagramEngine.getNodeFactories().registerFactory(new ConnectionNodeFactory());
+
 		this.newModel();
 	}
 
@@ -27,7 +36,7 @@ export class Application {
 		node2.setPosition(400, 100);
 
 		var connection1 = new ConnectionNodeModel();
-		connection1.setPosition(500,700);
+		connection1.setPosition(300,200);
 
 		// link the ports
 		let link1 = port.link(port2);
