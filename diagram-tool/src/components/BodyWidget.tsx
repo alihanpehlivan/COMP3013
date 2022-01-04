@@ -8,6 +8,8 @@ import LeftMenu from './LeftMenu'
 import { DiagramCanvasWidget } from './DiagramCanvasWidget';
 
 import Grid from '@mui/material/Grid';
+import { ListItem } from '@mui/material';
+import {TextField} from '@mui/material';
 
 export interface BodyWidgetProps {
 	app: Application;
@@ -40,13 +42,13 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 
 							if (data.type === 'in') 
 							{
-								//var name = 'Node';
+								var name = "Name";
 								//var colour = 'rgb(192,255,0)';
 								var defaultPort = 'Default';
 								var port = 'CLASS';
 								var port2 = 'ACTORS';
 								var port3 = 'DELETE';
-								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(192,255,0)');
+								node = new DefaultNodeModel(name + (nodesCount + 1), 'rgb(192,255,0)');
 								node.addInPort(defaultPort);
 								node.addInPort(port);
 								node.addInPort(port2);
