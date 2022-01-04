@@ -32,11 +32,17 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 
 							var node: DefaultNodeModel = null;
 
+							//*** Here is where nodes dragged from Tray Item widget get their colours set ***/
 							if (data.type === 'in') {
-								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(192,255,0)');
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(0,255,0)');
 								node.addInPort('In');
-							} else {
-								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(0,192,255)');
+							} 
+							if(data.type === 'out') {
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(0,0,255)');
+								node.addOutPort('Out');
+							}
+							if(data.type === 'red'){
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(255,0,0)');
 								node.addOutPort('Out');
 							}
 
