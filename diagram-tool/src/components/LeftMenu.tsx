@@ -17,8 +17,10 @@ export default function LeftMenu() {
     <Box>
 
       <Box sx={{ m: 2 }}>
-      <TrayItemWidget model={{ type: 'in' }} name="In Node" color="rgb(192,255,0)" />
-      <TrayItemWidget model={{ type: 'out' }} name="Out Node" color="rgb(0,192,255)" />
+      <TrayItemWidget model={{ type: 'in' }} name="In Node" color="rgb(0,255,0)" />
+      <TrayItemWidget model={{ type: 'out' }} name="Out Node" color="rgb(0,0,255)" />
+      <TrayItemWidget model={{ type: 'connection' }} name="Connection Node" color="rgb(255,0,0)" />
+
       </Box>
       <MenuList>
         <Divider />

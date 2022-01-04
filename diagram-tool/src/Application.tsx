@@ -1,4 +1,7 @@
 import * as SRD from '@projectstorm/react-diagrams';
+import { ConnectionNodeModel } from './components/ConnectionNodeModel';
+import { ConnectionNodeFactory } from './components/ConnectionNodeFactory';
+import { ConnectionPortModel } from './components/ConnectionPortModel';
 
 export class Application {
 	protected activeModel: SRD.DiagramModel;
@@ -22,6 +25,9 @@ export class Application {
 		var node2 = new SRD.DefaultNodeModel('Node 2', 'rgb(192,255,0)');
 		let port2 = node2.addInPort('In');
 		node2.setPosition(400, 100);
+
+		var connection1 = new ConnectionNodeModel();
+		connection1.setPosition(500,700);
 
 		// link the ports
 		let link1 = port.link(port2);

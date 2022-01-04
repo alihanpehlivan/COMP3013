@@ -41,9 +41,10 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(0,0,255)');
 								node.addOutPort('Out');
 							}
-							if(data.type === 'red'){
+							if(data.type === 'connection'){
 								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(255,0,0)');
 								node.addOutPort('Out');
+								node.addInPort('In');
 							}
 
 							var point = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
