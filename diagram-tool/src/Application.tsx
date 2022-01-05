@@ -1,11 +1,11 @@
 import * as SRD from '@projectstorm/react-diagrams';
 import { ConnectionNodeModel } from './components/ConnectionNodeModel';
 import { ConnectionNodeFactory } from './components/ConnectionNodeFactory';
-import { SimplePortFactory } from 'C:\Users\danie\Desktop\COMP3013\diagram-tool\src\components\SimplePortFactory';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 
 import { ConnectionPortModel } from './components/ConnectionPortModel';
 import createEngine, { DefaultNodeModel, DiagramModel, PortModelAlignment } from '@projectstorm/react-diagrams';
+import { SimplePortFactory } from './components/SimplePortFactory';
 
 
 export class Application {
@@ -14,9 +14,6 @@ export class Application {
 
 	constructor() {
 		this.diagramEngine = SRD.default();
-		this.diagramEngine.getPortFactories()
-		.registerFactory(new SimplePortFactory('connection', (config) => new ConnectionPortModel(PortModelAlignment.LEFT)));
-		this.diagramEngine.getNodeFactories().registerFactory(new ConnectionNodeFactory());
 
 		this.newModel();
 	}
@@ -24,6 +21,12 @@ export class Application {
 	public newModel() {
 		this.activeModel = new SRD.DiagramModel();
 		this.diagramEngine.setModel(this.activeModel);
+
+		
+		this.diagramEngine.getPortFactories()
+		.registerFactory(new SimplePortFactory('connection', (config) => new ConnectionPortModel(PortModelAlignment.LEFT)));
+		this.diagramEngine.getNodeFactories().registerFactory(new ConnectionNodeFactory());
+		
 
 		//3-A) create a default node
 		var node1 = new SRD.DefaultNodeModel('Node 1', 'rgb(0,192,255)');
@@ -36,11 +39,11 @@ export class Application {
 		node2.setPosition(400, 100);
 
 		var connection1 = new ConnectionNodeModel();
-		connection1.setPosition(300,200);
+		connection1.setPosition(100,200);
 
 		// link the ports
 		let link1 = port.link(port2);
-		this.activeModel.addAll(node1, node2, link1);
+		this.activeModel.addAll(node1, connection1, node2, link1);
 	}
 
 	public getActiveDiagram(): SRD.DiagramModel {

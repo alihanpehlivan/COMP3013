@@ -8,6 +8,7 @@ import LeftMenu from './LeftMenu'
 import { DiagramCanvasWidget } from './DiagramCanvasWidget';
 
 import Grid from '@mui/material/Grid';
+import { ConnectionNodeModel } from './ConnectionNodeModel';
 
 export interface BodyWidgetProps {
 	app: Application;
@@ -42,9 +43,8 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 								node.addOutPort('Out');
 							}
 							if(data.type === 'connection'){
-								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(255,0,0)');
-								node.addOutPort('Out');
-								node.addInPort('In');
+								var conectionNode = new ConnectionNodeModel();
+						 
 							}
 
 							var point = this.props.app.getDiagramEngine().getRelativeMousePoint(event);

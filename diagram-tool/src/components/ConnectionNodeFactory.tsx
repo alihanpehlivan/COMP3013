@@ -7,7 +7,7 @@ import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 
 export class ConnectionNodeFactory extends AbstractReactFactory<ConnectionNodeModel, DiagramEngine> {
     constructor() {
-        super('diamond');
+        super('connection');
     }
 
     generateReactWidget(event): JSX.Element {

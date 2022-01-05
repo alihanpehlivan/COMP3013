@@ -26,6 +26,7 @@ const theme = createTheme({
 
 document.addEventListener('DOMContentLoaded', () => {
   var app = new Application();
+  
   ReactDOM.render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
