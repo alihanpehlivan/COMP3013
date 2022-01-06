@@ -9,45 +9,58 @@
   padding: 15px;
   background: lightblue;
   background-clip: border-box; 
+  width: 300px;
     }
 
-    #backgroundBoxInput{
-        border: 10px;
-  padding: 15px;
-  background: lightblue;
-  background-clip: border-box; 
+    .text{
+        color: white;
+    }
+
+    .finiteText{
+        color: white;
+    }
+
+    .header{
+        color: yellow;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
 </style>
-<body>
+<body style = "background-color: green;">
 
 
-<h1>Artificial Intelligence</h1>
+<h1 class="header">Artificial Intelligence</h1>
 
 <div id="backgroundBox">
     <a href="#Behaviour Tree">Behaviour Tree</a><br>
+    <br>
     <a href="#Finite State Machine">Finite State Machine</a>
     </div>
+	
+	<h2 class="header">What is Artificial Intelligence?</h2>
+	<p class="text">Artificial Intelligence</p>
 
 
 
-    <h2>Finite State Machine</h2>
+    <h2 class="header">Finite State Machine</h2>
 
     <p><a name="Finite State Machine"></a></p>
-    <p>Finite State Machine</p>
+    <h3 class="header">What is a Finite State Machine?</h3>
+    <p class="text">Finite State Machine</p>
+    <h3 class="header">How to make a Finite State Machine Diagram</h3>
+    <img src="GIF_Placeholder.gif" width="400px" height="400px" style="float:right">
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <h3>Behaviour Tree</h3>
-    <p><a name="Behaviour Tree"></a>Behaviour Tree</p>
+    <h3 class="header">Behaviour Tree</h3>
+    <p><a name="Behaviour Tree"></a></p>
+    <h3 class="header">What is a Behaviour Tree?</h3>
+    <p class="text">Behaviour Tree</p>
+    <h3 class="header">How to make a Behaviour Tree Diagram</h3>
+    <img src="GIF_Placeholder.gif" width="400px" height="400px" style="float:left">
 </body>
 
-<script>
-
-    function getNodeData()
-    {
-        var name = document.getElementById("textNode").value;
-        var colour = document.getElementById("colourNode").value;
-        alert(name + " " +  colour);
-
-    }
-</script>
 </html>
