@@ -1,13 +1,11 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { Application } from '../Application';
 import { DefaultNodeModel } from '@projectstorm/react-diagrams';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
-
-import LeftMenu from './LeftMenu'
-import { DiagramCanvasWidget } from './DiagramCanvasWidget';
-
 import Grid from '@mui/material/Grid';
+
+import { Application } from '../Application';
+import LeftMenu from './LeftMenu'
 
 export interface BodyWidgetProps {
 	app: Application;
@@ -51,9 +49,9 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 							event.preventDefault();
 						}}>
 
-						<DiagramCanvasWidget>
+						<div className='mesh-grid'>
 							<CanvasWidget engine={this.props.app.getDiagramEngine()} />
-						</DiagramCanvasWidget>
+						</div>
 
 					</Grid>
 				</Grid>
