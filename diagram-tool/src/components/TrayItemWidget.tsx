@@ -35,3 +35,5 @@ export class TrayItemWidget extends React.Component<TrayItemWidgetProps> {
 		);
 	}
 }
+
+export default TrayItemWidget

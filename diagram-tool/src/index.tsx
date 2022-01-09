@@ -1,8 +1,15 @@
+import {
+  createTheme,
+  ThemeProvider,
+  CssBaseline,
+} from '@mui/material'
+
 import ReactDOM from 'react-dom';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+
 import { BodyWidget } from './components/BodyWidget';
 import { Application } from './Application';
+
+import './main.css'
 
 const theme = createTheme({
   palette: {
@@ -12,10 +19,10 @@ const theme = createTheme({
       paper: '#2f2f2f',
     },
     primary: {
-      main: '#2f2f2f'
+      main: '#fff'
     },
     secondary: {
-      main: '#006bb2'
+      main: '#fff'
     },
     text: {
       primary: '#ffffff',

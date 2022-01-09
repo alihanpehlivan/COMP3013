@@ -1,33 +1,33 @@
-import { TrayItemWidget } from './TrayItemWidget';
+import {
+  Box,
+  Divider,
+  MenuList,
+  MenuItem,
+  ListItemText,
+} from '@mui/material'
 
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemText from '@mui/material/ListItemText';
+import {
+  GetAppOutlined,
+  Add,
+} from '@mui/icons-material'
 
-import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
-import AddIcon from '@mui/icons-material/Add';
-
-import Typography from '@mui/material/Typography';
+import TrayItemWidget from './TrayItemWidget';
 
 export default function LeftMenu() {
   return (
     <Box>
-
       <Box sx={{ m: 2 }}>
-      <TrayItemWidget model={{ type: 'in' }} name="In Node" color="rgb(192,255,0)" />
-      <TrayItemWidget model={{ type: 'out' }} name="Out Node" color="rgb(0,192,255)" />
+        <TrayItemWidget model={{ type: 'in' }} name="In Node" color="rgb(192,255,0)" />
+        <TrayItemWidget model={{ type: 'out' }} name="Out Node" color="rgb(0,192,255)" />
       </Box>
       <MenuList>
         <Divider />
         <MenuItem>
-          <AddIcon fontSize="small"/>
+          <Add fontSize="small"/>
           <ListItemText>Create new node type</ListItemText>
         </MenuItem>
         <MenuItem>
-          <GetAppOutlinedIcon fontSize="small"/>
+          <GetAppOutlined fontSize="small"/>
           <ListItemText>Export as image</ListItemText>
         </MenuItem>
       </MenuList>
