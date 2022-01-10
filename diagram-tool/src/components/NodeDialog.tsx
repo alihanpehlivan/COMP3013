@@ -1,63 +1,87 @@
-
+import NodeContext, { NodeInfo, NodeTypes } from '../DataStore'
+import React, { useContext } from 'react';
 import {
+  Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
   Button,
   TextField,
-
   Radio,
   RadioGroup,
   FormControlLabel,
 } from '@mui/material'
 
-export interface INodeDialog {
-  onClose: React.MouseEventHandler,
-}
+export const NodeDialog = (
+  params: {
+    isOpen: boolean,
+    onClose : React.MouseEventHandler }) => {
 
-function handleSubmit(evt): void {
-  evt.preventDefault()
-  console.log("submitting")
-}
+  const nodeContext = useContext<NodeInfo>(NodeContext);
 
-export default function NodeDialog(params : INodeDialog) {
   return (
-    <form onSubmit={handleSubmit}>
-      <DialogTitle>Create Custom Node</DialogTitle>
-      <DialogContent>
-        {/*<DialogContentText>
-          Specify custom node details.
-        </DialogContentText>*/}
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Node Name"
-          type="text"
-          fullWidth
-          variant="standard"
-        />
-        <TextField
-          sx={{ mt: 2 }}
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Node Hex Color"
-          type="text"
-          defaultValue="#000"
-          fullWidth
-          variant="standard"
-        />
-        <RadioGroup row name="node-type" sx={{ mt: 2 }}>
-          <FormControlLabel value="input" control={<Radio />} label="Input" />
-          <FormControlLabel value="output" control={<Radio />} label="Output" />
-        </RadioGroup>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={params.onClose}>CANCEL</Button>
-        <Button type='submit'>CREATE</Button>
-      </DialogActions>
-    </form>
+    <Dialog open={params.isOpen} onClose={params.onClose} >
+      <form
+        onSubmit={(e: React.SyntheticEvent) => {
+          e.preventDefault()
+
+          // Typechecks!
+          const target = e.target as typeof e.target & {
+            name: { value: string }
+            color: { value: string }
+            nodetype: { value: NodeTypes }
+          };
+
+          //console.log(target.name.value, target.color.value, target.nodetype.value)
+
+          nodeContext.push({
+            name: target.name.value,
+            color: target.color.value,
+            type: target.nodetype.value,
+          })
+
+          // Close the dialog
+          params.onClose(null)
+        }}
+      >
+        <DialogTitle>Create Custom Node</DialogTitle>
+        <DialogContent>
+          {<DialogContentText>
+            Specify custom node details.
+          </DialogContentText>}
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Node Name"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            sx={{ mt: 2 }}
+            autoFocus
+            margin="dense"
+            id="color"
+            label="Node Hex Color"
+            type="text"
+            defaultValue="#000"
+            fullWidth
+            variant="standard"
+          />
+          <RadioGroup name="nodetype" defaultValue={NodeTypes.IN} sx={{ mt: 2 }}>
+            <FormControlLabel value={NodeTypes.IN} control={<Radio />} label="Input" />
+            <FormControlLabel value={NodeTypes.OUT} control={<Radio />} label="Output" />
+          </RadioGroup>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={params.onClose}>CANCEL</Button>
+          <Button type='submit'>CREATE</Button>
+        </DialogActions>
+      </form>
+    </Dialog>
   )
 }
+
+export default NodeDialog
