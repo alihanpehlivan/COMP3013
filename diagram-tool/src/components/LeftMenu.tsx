@@ -7,6 +7,7 @@ import {
   MenuList,
   MenuItem,
   ListItemText,
+  ListItem,
 } from '@mui/material'
 
 import {
@@ -21,6 +22,12 @@ import NodeDialog from './NodeDialog';
 export default function LeftMenu() {
 
   const [isOpen, setNodeDialogOpen] = React.useState(false);
+
+  function loadDocs()
+  {
+    window.open("https://app.gitbook.com/s/iGmyRzSxqdKjIOZOgnxc/", 'blank'); //loads Documentation in a new tab
+
+  }
 
   return (
     <>
@@ -47,6 +54,10 @@ export default function LeftMenu() {
         <MenuItem>
           <GetAppOutlined fontSize="small"/>
           <ListItemText>Export as image</ListItemText>
+        </MenuItem>
+
+        <MenuItem>
+        <ListItem onClick={loadDocs}>Documentation</ListItem>
         </MenuItem>
 
       </MenuList>
