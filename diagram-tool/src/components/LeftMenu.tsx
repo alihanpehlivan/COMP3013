@@ -50,7 +50,7 @@ export default function LeftMenu(params: {
         <MenuItem
           onClick={() => {
             window.open(
-              "https://app.gitbook.com/s/iGmyRzSxqdKjIOZOgnxc/",
+              "https://martin-blenkhorn.gitbook.io/m.a.d-board-docs/",
               "blank"
             )
           }}
