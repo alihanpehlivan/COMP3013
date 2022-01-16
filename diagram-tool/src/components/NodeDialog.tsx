@@ -1,5 +1,5 @@
-import NodeContext, { NodeInfo, NodeTypes } from '../DataStore'
-import React, { useContext } from 'react';
+import React, { useContext } from "react"
+import * as SRD from "@projectstorm/react-diagrams"
 import {
   Dialog,
   DialogTitle,
@@ -11,17 +11,18 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
-} from '@mui/material'
+} from "@mui/material"
 
-export const NodeDialog = (
-  params: {
-    isOpen: boolean,
-    onClose : React.MouseEventHandler }) => {
+import { NodeInfo, NodeTypes } from "../Types"
 
-  const nodeContext = useContext<NodeInfo>(NodeContext);
-
+export const NodeDialog = (params: {
+  isOpen: boolean
+  onClose: React.MouseEventHandler
+  engine: SRD.DiagramEngine
+  nodes: NodeInfo
+}) => {
   return (
-    <Dialog open={params.isOpen} onClose={params.onClose} >
+    <Dialog open={params.isOpen} onClose={params.onClose}>
       <form
         onSubmit={(e: React.SyntheticEvent) => {
           e.preventDefault()
@@ -31,15 +32,26 @@ export const NodeDialog = (
             name: { value: string }
             color: { value: string }
             nodetype: { value: NodeTypes }
-          };
+          }
 
           //console.log(target.name.value, target.color.value, target.nodetype.value)
 
-          nodeContext.push({
+          params.nodes.push({
             name: target.name.value,
             color: target.color.value,
             type: target.nodetype.value,
           })
+
+          let engine = params.engine
+          let curModel = engine.getModel()
+
+          let node = new SRD.DefaultNodeModel(
+            target.name.value,
+            target.color.value
+          )
+
+          curModel.addNode(node)
+          node.setPosition(50, 50)
 
           // Close the dialog
           params.onClose(null)
@@ -47,32 +59,42 @@ export const NodeDialog = (
       >
         <DialogTitle>Create Custom Node</DialogTitle>
         <DialogContent>
-          {<DialogContentText>
-            Specify custom node details.
-          </DialogContentText>}
+          {<DialogContentText>Specify custom node details.</DialogContentText>}
           <TextField
             autoFocus
-            margin="dense"
-            id="name"
-            label="Node Name"
-            type="text"
+            margin='dense'
+            id='name'
+            label='Node Name'
+            type='text'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
           <TextField
             sx={{ mt: 2 }}
             autoFocus
-            margin="dense"
-            id="color"
-            label="Node Hex Color"
-            type="text"
-            defaultValue="#000"
+            margin='dense'
+            id='color'
+            label='Node Hex Color'
+            type='text'
+            defaultValue='#000'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
-          <RadioGroup name="nodetype" defaultValue={NodeTypes.IN} sx={{ mt: 2 }}>
-            <FormControlLabel value={NodeTypes.IN} control={<Radio />} label="Input" />
-            <FormControlLabel value={NodeTypes.OUT} control={<Radio />} label="Output" />
+          <RadioGroup
+            name='nodetype'
+            defaultValue={NodeTypes.IN}
+            sx={{ mt: 2 }}
+          >
+            <FormControlLabel
+              value={NodeTypes.IN}
+              control={<Radio />}
+              label='Input'
+            />
+            <FormControlLabel
+              value={NodeTypes.OUT}
+              control={<Radio />}
+              label='Output'
+            />
           </RadioGroup>
         </DialogContent>
         <DialogActions>

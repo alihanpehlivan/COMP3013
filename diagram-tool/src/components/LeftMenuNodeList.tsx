@@ -1,26 +1,57 @@
-import { useContext } from 'react'
-
 import {
-  MenuList,
-  MenuItem,
+  List,
+  ListItem,
+  ListItemButton,
   ListItemText,
-} from '@mui/material'
+  IconButton,
+} from "@mui/material"
+import { Square as SquareIcon, Delete as DeleteIcon } from "@mui/icons-material"
+import * as SRD from "@projectstorm/react-diagrams"
+import { NodeInfo } from "../Types"
 
-import NodeContext, { NodeInfo } from '../DataStore'
+export default function LeftMenuNodeList(params: {
+  engine: SRD.DiagramEngine
+  nodes: NodeInfo
+}) {
+  return (
+    <List>
+      {params.nodes.map((node, index) => (
+        <ListItem
+          key={index}
+          secondaryAction={
+            <>
+              <IconButton
+                sx={{ marginRight: "2px" }}
+                edge='end'
+                onClick={() => {
+                  console.log("change color")
+                }}
+              >
+                <SquareIcon htmlColor={node.color} />
+              </IconButton>
 
-// Consumer
-const LeftMenuNodeList = () => {
-  const nodeArr = useContext<NodeInfo>(NodeContext);
-
-  return(
-    <MenuList>
-      {nodeArr.map((node, index) => (
-        <MenuItem key={index}>
-          <ListItemText>{node.name} / {node.color}</ListItemText>
-        </MenuItem>
+              <IconButton
+                edge='end'
+                onClick={() => {
+                  console.log("delete me")
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </>
+          }
+          disablePadding
+        >
+          <ListItemButton
+            onClick={() => {
+              console.log("clickmeh")
+            }}
+            dense
+          >
+            <ListItemText primary={node.name} />
+          </ListItemButton>
+        </ListItem>
       ))}
-    </MenuList>
+    </List>
   )
 }
-
-export default LeftMenuNodeList

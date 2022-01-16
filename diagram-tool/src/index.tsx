@@ -1,42 +1,37 @@
-import {
-  createTheme,
-  ThemeProvider,
-  CssBaseline,
-} from '@mui/material'
+import { createTheme, ThemeProvider, CssBaseline } from "@mui/material"
+import ReactDOM from "react-dom"
+import Application from "./Application"
+import BodyWidget from "./components/BodyWidget"
 
-import ReactDOM from 'react-dom';
-
-import { BodyWidget } from './components/BodyWidget';
-import { Application } from './Application';
-
-import './main.css'
+import "./main.css"
 
 const theme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
     background: {
-      default: '#2f2f2f',
-      paper: '#2f2f2f',
+      default: "#2f2f2f",
+      paper: "#2f2f2f",
     },
     primary: {
-      main: '#fff'
+      main: "#fff",
     },
     secondary: {
-      main: '#fff'
+      main: "#fff",
     },
     text: {
-      primary: '#ffffff',
-      secondary: '#bfbfbf'
+      primary: "#ffffff",
+      secondary: "#bfbfbf",
     },
   },
-});
+})
 
-document.addEventListener('DOMContentLoaded', () => {
-  var app = new Application();
+document.addEventListener("DOMContentLoaded", () => {
+  var app = new Application()
   ReactDOM.render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BodyWidget app={app} />
     </ThemeProvider>,
-    document.querySelector('#application'),);
-});
+    document.querySelector("#application")
+  )
+})

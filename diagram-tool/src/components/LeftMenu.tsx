@@ -1,57 +1,61 @@
-import * as React from 'react';
+import * as React from "react"
+import { DiagramEngine } from "@projectstorm/react-diagrams"
+import { Divider, MenuList, MenuItem, ListItemText } from "@mui/material"
+import { GetAppOutlined, Article, Add } from "@mui/icons-material"
+import LeftMenuNodeList from "./LeftMenuNodeList"
+import NodeDialog from "./NodeDialog"
+import { NodeInfo } from "../Types"
 
-import {
-  Divider,
-  MenuList,
-  MenuItem,
-  ListItemText,
-} from '@mui/material'
-
-import {
-  GetAppOutlined,
-  Article,
-  Add,
-} from '@mui/icons-material'
-
-import LeftMenuNodeList from './LeftMenuNodeList';
-import NodeDialog from './NodeDialog';
-
-export default function LeftMenu() {
-
-  const [openDialogName, setOpenDialog] = React.useState(null);
+export default function LeftMenu(params: {
+  engine: DiagramEngine
+  nodes: NodeInfo
+}) {
+  const [openDialogName, setOpenDialog] = React.useState(null)
 
   const openCustomNodeDialog = () => {
-    setOpenDialog('NODE')
+    setOpenDialog("NODE")
   }
 
   const closeDialog = () => {
-    setOpenDialog(null);
-  };
-  
+    setOpenDialog(null)
+  }
+
   return (
     <>
-      <LeftMenuNodeList />
+      <LeftMenuNodeList engine={params.engine} nodes={params.nodes} />
 
       <MenuList>
         <Divider />
+
         <MenuItem onClick={openCustomNodeDialog}>
-          <Add fontSize="small"/>
+          <Add fontSize='small' />
           <ListItemText>Create new node type</ListItemText>
         </MenuItem>
 
         <MenuItem>
-          <GetAppOutlined fontSize="small"/>
+          <GetAppOutlined fontSize='small' />
           <ListItemText>Export as image</ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={() => { window.open("https://app.gitbook.com/s/iGmyRzSxqdKjIOZOgnxc/", 'blank') }}>
-          <Article fontSize="small"/>
+        <MenuItem
+          onClick={() => {
+            window.open(
+              "https://app.gitbook.com/s/iGmyRzSxqdKjIOZOgnxc/",
+              "blank"
+            )
+          }}
+        >
+          <Article fontSize='small' />
           <ListItemText>Documentation</ListItemText>
         </MenuItem>
 
-        <NodeDialog isOpen={openDialogName === 'NODE'} onClose={closeDialog} ></NodeDialog>
-
+        <NodeDialog
+          isOpen={openDialogName === "NODE"}
+          onClose={closeDialog}
+          engine={params.engine}
+          nodes={params.nodes}
+        ></NodeDialog>
       </MenuList>
-
-    </>);
+    </>
+  )
 }
