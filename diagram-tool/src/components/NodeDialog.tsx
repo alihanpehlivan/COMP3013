@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import * as SRD from "@projectstorm/react-diagrams"
 import {
   Dialog,
@@ -18,7 +18,6 @@ import { NodeInfo, NodeTypes } from "../Types"
 export const NodeDialog = (params: {
   isOpen: boolean
   onClose: React.MouseEventHandler
-  engine: SRD.DiagramEngine
   nodes: NodeInfo
 }) => {
   return (
@@ -34,14 +33,9 @@ export const NodeDialog = (params: {
             nodetype: { value: NodeTypes }
           }
 
-          //console.log(target.name.value, target.color.value, target.nodetype.value)
-
           if (target.name.value === "") {
             target.name.value = "Unnamed Node"
           }
-
-          let engine = params.engine
-          let curModel = engine.getModel()
 
           let node = new SRD.DefaultNodeModel(
             target.name.value,
@@ -55,12 +49,6 @@ export const NodeDialog = (params: {
             type: target.nodetype.value,
           })
 
-          console.log(node.getOptions())
-
-          curModel.addNode(node)
-          node.setPosition(50, 50)
-
-          engine.repaintCanvas()
           params.onClose(null) // Close the dialog
         }}
       >
@@ -78,7 +66,6 @@ export const NodeDialog = (params: {
           />
           <TextField
             sx={{ mt: 2 }}
-            autoFocus
             margin='dense'
             id='color'
             label='Node Hex Color'
@@ -101,6 +88,11 @@ export const NodeDialog = (params: {
               value={NodeTypes.OUT}
               control={<Radio />}
               label='Output'
+            />
+            <FormControlLabel
+              value={NodeTypes.IN | NodeTypes.OUT}
+              control={<Radio />}
+              label='Both'
             />
           </RadioGroup>
         </DialogContent>

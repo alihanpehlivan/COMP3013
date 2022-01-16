@@ -1,6 +1,7 @@
 export enum NodeTypes {
-  IN,
-  OUT,
+  NONE    = 0 << 0, // 0
+  IN      = 1 << 0, // 1
+  OUT     = 1 << 1, // 2
 }
 
 export type NodeInfo = {

@@ -62,7 +62,6 @@ export default function LeftMenu(params: {
         <NodeDialog
           isOpen={openDialogName === "NODE"}
           onClose={closeDialog}
-          engine={params.engine}
           nodes={params.nodes}
         ></NodeDialog>
       </MenuList>
