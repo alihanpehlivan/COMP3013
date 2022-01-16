@@ -36,6 +36,10 @@ export const NodeDialog = (params: {
 
           //console.log(target.name.value, target.color.value, target.nodetype.value)
 
+          if (target.name.value === "") {
+            target.name.value = "Unnamed Node"
+          }
+
           params.nodes.push({
             name: target.name.value,
             color: target.color.value,
@@ -53,8 +57,8 @@ export const NodeDialog = (params: {
           curModel.addNode(node)
           node.setPosition(50, 50)
 
-          // Close the dialog
-          params.onClose(null)
+          engine.repaintCanvas()
+          params.onClose(null) // Close the dialog
         }}
       >
         <DialogTitle>Create Custom Node</DialogTitle>

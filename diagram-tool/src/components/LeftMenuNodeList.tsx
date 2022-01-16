@@ -4,15 +4,26 @@ import {
   ListItemButton,
   ListItemText,
   IconButton,
+  Checkbox,
 } from "@mui/material"
 import { Square as SquareIcon, Delete as DeleteIcon } from "@mui/icons-material"
 import * as SRD from "@projectstorm/react-diagrams"
 import { NodeInfo } from "../Types"
+import React from "react"
 
 export default function LeftMenuNodeList(params: {
   engine: SRD.DiagramEngine
   nodes: NodeInfo
 }) {
+  const [selectedIndex, setSelectedIndex] = React.useState(0)
+
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => {
+    setSelectedIndex(index)
+  }
+
   return (
     <List>
       {params.nodes.map((node, index) => (
@@ -43,9 +54,8 @@ export default function LeftMenuNodeList(params: {
           disablePadding
         >
           <ListItemButton
-            onClick={() => {
-              console.log("clickmeh")
-            }}
+            selected={selectedIndex === index}
+            onClick={(event) => handleListItemClick(event, index)}
             dense
           >
             <ListItemText primary={node.name} />
