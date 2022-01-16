@@ -3,28 +3,18 @@ import { DiagramEngine } from "@projectstorm/react-diagrams"
 import { Divider, MenuList, MenuItem, ListItemText } from "@mui/material"
 import { GetAppOutlined, Article, Add } from "@mui/icons-material"
 import LeftMenuNodeList from "./LeftMenuNodeList"
-import NodeDialog from "./NodeDialog"
 import { NodeInfo } from "../Types"
 
 export default function LeftMenu(params: {
   engine: DiagramEngine
   nodes: NodeInfo
+  setOpenDialog: (n: string) => void
   onSelectNode: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
   ) => void
   selectedNodeIndex: number
 }) {
-  const [openDialogName, setOpenDialog] = React.useState(null)
-
-  const openCustomNodeDialog = () => {
-    setOpenDialog("NODE")
-  }
-
-  const closeDialog = () => {
-    setOpenDialog(null)
-  }
-
   return (
     <>
       <LeftMenuNodeList
@@ -37,7 +27,7 @@ export default function LeftMenu(params: {
       <MenuList>
         <Divider />
 
-        <MenuItem onClick={openCustomNodeDialog}>
+        <MenuItem onClick={() => params.setOpenDialog('NODE')}>
           <Add fontSize='small' />
           <ListItemText>Create new node type</ListItemText>
         </MenuItem>
@@ -58,12 +48,6 @@ export default function LeftMenu(params: {
           <Article fontSize='small' />
           <ListItemText>Documentation</ListItemText>
         </MenuItem>
-
-        <NodeDialog
-          isOpen={openDialogName === "NODE"}
-          onClose={closeDialog}
-          nodes={params.nodes}
-        ></NodeDialog>
       </MenuList>
     </>
   )

@@ -5,11 +5,13 @@ import Grid from "@mui/material/Grid"
 import Application from "../Application"
 import LeftMenu from "./LeftMenu"
 import { NodeInfo, NodeTypes } from "../Types"
+import NodeDialog from "./NodeDialog"
 
 export const BodyWidget = (params: { app: Application }) => {
   let diagramEngine = params.app.getDiagramEngine()
 
   const [nodes, setNodes] = useState<NodeInfo>([])
+  const [openDialogName, setOpenDialog] = useState(null)
   const [selectedNodeIndex, setSelectedNodeIndex] = useState(undefined)
 
   const handleListItemClick = (
@@ -83,27 +85,37 @@ export const BodyWidget = (params: { app: Application }) => {
   }, [diagramEngine])
 
   return (
-    <Grid container component='main' sx={{ height: "100vh" }}>
-      {/* Left Menu */}
-      <Grid item xs={2}>
-        <LeftMenu
-          engine={diagramEngine}
-          nodes={nodes}
-          onSelectNode={handleListItemClick}
-          selectedNodeIndex={selectedNodeIndex}
-        />
+    <>
+      <Grid container component='main' sx={{ height: "100vh" }}>
+        {/* Left Menu */}
+        <Grid item xs={2}>
+          <LeftMenu
+            engine={diagramEngine}
+            nodes={nodes}
+            setOpenDialog={setOpenDialog}
+            onSelectNode={handleListItemClick}
+            selectedNodeIndex={selectedNodeIndex}
+          />
+        </Grid>
+
+        {/* Right Drawing Canvas */}
+        <Grid
+          item
+          xs={10}
+          className='mesh-grid'
+          onMouseDown={handleDrawingCanvasClick}
+        >
+          <CanvasWidget engine={diagramEngine} />
+        </Grid>
       </Grid>
 
-      {/* Right Drawing Canvas */}
-      <Grid
-        item
-        xs={10}
-        className='mesh-grid'
-        onMouseDown={handleDrawingCanvasClick}
-      >
-        <CanvasWidget engine={diagramEngine} />
-      </Grid>
-    </Grid>
+      {/* Put additional dialogs here */}
+      <NodeDialog
+        isOpen={openDialogName === "NODE"}
+        onClose={() => setOpenDialog(null)}
+        nodes={nodes}
+      />
+    </>
   )
 }
 
