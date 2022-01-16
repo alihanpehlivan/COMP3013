@@ -4,6 +4,7 @@ export enum NodeTypes {
 }
 
 export type NodeInfo = {
+  id: string
   name: string
   color: string
   type: NodeTypes

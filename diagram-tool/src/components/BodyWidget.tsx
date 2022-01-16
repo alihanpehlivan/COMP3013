@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
+import * as SRD from "@projectstorm/react-diagrams"
 import { CanvasWidget } from "@projectstorm/react-canvas-core"
 import Grid from "@mui/material/Grid"
 import Application from "../Application"
@@ -9,6 +10,7 @@ export const BodyWidget = (params: { app: Application }) => {
   let diagramEngine = params.app.getDiagramEngine()
 
   const [nodes, setNodes] = useState<NodeInfo>([])
+  const [selectedNodeIndex, setSelectedNodeIndex] = useState(0)
 
   const getNodesFromEngine = useCallback(() => {
     let currentModel = diagramEngine.getModel()
@@ -17,6 +19,7 @@ export const BodyWidget = (params: { app: Application }) => {
     let newNodes: NodeInfo = modelNodes.map((node) => {
       let options = node.getOptions()
       return {
+        id: options["id"],
         name: options["name"],
         color: options["color"],
         type: NodeTypes.IN,
@@ -26,15 +29,37 @@ export const BodyWidget = (params: { app: Application }) => {
     return newNodes
   }, [diagramEngine])
 
-  const addNode = (): void => {
-    setNodes([
-      ...nodes,
-      {
-        name: "name",
-        color: "#fff",
-        type: NodeTypes.IN,
-      },
-    ])
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => {
+    // Toggle button
+    if (selectedNodeIndex === index) {
+      setSelectedNodeIndex(undefined)
+      return
+    }
+    setSelectedNodeIndex(index)
+  }
+
+  const handleDrawingCanvasClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    let point = diagramEngine.getRelativeMousePoint(event)
+    const currentNodeInfo = nodes[selectedNodeIndex]
+
+    if (currentNodeInfo !== undefined) {
+      console.log(currentNodeInfo)
+
+      let curModel = diagramEngine.getModel()
+
+      let newNode = new SRD.DefaultNodeModel(
+        currentNodeInfo.name,
+        currentNodeInfo.color
+      )
+
+      curModel.addNode(newNode)
+      newNode.setPosition(point)
+    }
   }
 
   // Load from engine
@@ -46,11 +71,21 @@ export const BodyWidget = (params: { app: Application }) => {
     <Grid container component='main' sx={{ height: "100vh" }}>
       {/* Left Menu */}
       <Grid item xs={2}>
-        <LeftMenu engine={diagramEngine} nodes={nodes} />
+        <LeftMenu
+          engine={diagramEngine}
+          nodes={nodes}
+          onSelectNode={handleListItemClick}
+          selectedNodeIndex={selectedNodeIndex}
+        />
       </Grid>
 
       {/* Right Drawing Canvas */}
-      <Grid item xs={10} className='mesh-grid'>
+      <Grid
+        item
+        xs={10}
+        className='mesh-grid'
+        onMouseDown={handleDrawingCanvasClick}
+      >
         <CanvasWidget engine={diagramEngine} />
       </Grid>
     </Grid>

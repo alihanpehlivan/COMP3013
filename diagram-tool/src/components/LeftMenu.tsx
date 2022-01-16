@@ -9,6 +9,11 @@ import { NodeInfo } from "../Types"
 export default function LeftMenu(params: {
   engine: DiagramEngine
   nodes: NodeInfo
+  onSelectNode: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => void
+  selectedNodeIndex: number
 }) {
   const [openDialogName, setOpenDialog] = React.useState(null)
 
@@ -22,7 +27,12 @@ export default function LeftMenu(params: {
 
   return (
     <>
-      <LeftMenuNodeList engine={params.engine} nodes={params.nodes} />
+      <LeftMenuNodeList
+        engine={params.engine}
+        nodes={params.nodes}
+        onSelectNode={params.onSelectNode}
+        selectedNodeIndex={params.selectedNodeIndex}
+      />
 
       <MenuList>
         <Divider />

@@ -40,12 +40,6 @@ export const NodeDialog = (params: {
             target.name.value = "Unnamed Node"
           }
 
-          params.nodes.push({
-            name: target.name.value,
-            color: target.color.value,
-            type: target.nodetype.value,
-          })
-
           let engine = params.engine
           let curModel = engine.getModel()
 
@@ -53,6 +47,15 @@ export const NodeDialog = (params: {
             target.name.value,
             target.color.value
           )
+
+          params.nodes.push({
+            id: node.getOptions().id,
+            name: target.name.value,
+            color: target.color.value,
+            type: target.nodetype.value,
+          })
+
+          console.log(node.getOptions())
 
           curModel.addNode(node)
           node.setPosition(50, 50)
