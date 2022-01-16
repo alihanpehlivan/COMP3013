@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import * as SRD from "@projectstorm/react-diagrams"
 import {
   Dialog,
@@ -14,12 +14,15 @@ import {
 } from "@mui/material"
 
 import { NodeInfo, NodeTypes } from "../Types"
+import ColorPickerDialog from "./ColorPickerDialog"
 
 export const NodeDialog = (params: {
   isOpen: boolean
   onClose: React.MouseEventHandler
   nodes: NodeInfo
 }) => {
+  const [color, setColor] = useState("#fff")
+
   return (
     <Dialog open={params.isOpen} onClose={params.onClose}>
       <form
@@ -29,7 +32,6 @@ export const NodeDialog = (params: {
           // Typechecks!
           const target = e.target as typeof e.target & {
             name: { value: string }
-            color: { value: string }
             nodetype: { value: NodeTypes }
           }
 
@@ -37,15 +39,12 @@ export const NodeDialog = (params: {
             target.name.value = "Unnamed Node"
           }
 
-          let node = new SRD.DefaultNodeModel(
-            target.name.value,
-            target.color.value
-          )
+          let node = new SRD.DefaultNodeModel(target.name.value, color)
 
           params.nodes.push({
             id: node.getOptions().id,
             name: target.name.value,
-            color: target.color.value,
+            color: color,
             type: target.nodetype.value,
           })
 
@@ -57,6 +56,7 @@ export const NodeDialog = (params: {
           {<DialogContentText>Specify custom node details.</DialogContentText>}
           <TextField
             autoFocus
+            sx={{ mt: 2, mb: 2 }}
             margin='dense'
             id='name'
             label='Node Name'
@@ -64,16 +64,12 @@ export const NodeDialog = (params: {
             fullWidth
             variant='standard'
           />
-          <TextField
-            sx={{ mt: 2 }}
-            margin='dense'
-            id='color'
-            label='Node Hex Color'
-            type='text'
-            defaultValue='#000'
-            fullWidth
-            variant='standard'
-          />
+
+          <ColorPickerDialog
+            color={color}
+            onChangeColor={setColor}
+          ></ColorPickerDialog>
+
           <RadioGroup
             name='nodetype'
             defaultValue={NodeTypes.IN}
