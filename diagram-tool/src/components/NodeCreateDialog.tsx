@@ -13,13 +13,13 @@ import {
   FormControlLabel,
 } from "@mui/material"
 
-import { NodeInfo, NodeTypes } from "../Types"
+import { NodeInfoArray, NodeTypes } from "../Types"
 import ColorPickerDialog from "./ColorPickerDialog"
 
-export const NodeDialog = (params: {
+export const NodeCreateDialog = (params: {
   isOpen: boolean
   onClose: React.MouseEventHandler
-  nodes: NodeInfo
+  nodes: NodeInfoArray
 }) => {
   const [color, setColor] = useState("#fff")
 
@@ -101,4 +101,4 @@ export const NodeDialog = (params: {
   )
 }
 
-export default NodeDialog
+export default NodeCreateDialog

@@ -3,12 +3,13 @@ import { DiagramEngine } from "@projectstorm/react-diagrams"
 import { Divider, MenuList, MenuItem, ListItemText } from "@mui/material"
 import { GetAppOutlined, Article, Add } from "@mui/icons-material"
 import LeftMenuNodeList from "./LeftMenuNodeList"
-import { NodeInfo } from "../Types"
+import { NodeInfoArray } from "../Types"
 
 export default function LeftMenu(params: {
   engine: DiagramEngine
-  nodes: NodeInfo
-  setOpenDialog: (n: string) => void
+  nodes: NodeInfoArray
+  setOpenDialog: (dialogName: string) => void
+  onDeleteNode: (id: string) => void
   onSelectNode: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
@@ -20,6 +21,8 @@ export default function LeftMenu(params: {
       <LeftMenuNodeList
         engine={params.engine}
         nodes={params.nodes}
+        setOpenDialog={params.setOpenDialog}
+        onDeleteNode={params.onDeleteNode}
         onSelectNode={params.onSelectNode}
         selectedNodeIndex={params.selectedNodeIndex}
       />

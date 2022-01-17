@@ -9,4 +9,6 @@ export type NodeInfo = {
   name: string
   color: string
   type: NodeTypes
-}[]
+}
+
+export type NodeInfoArray = NodeInfo[]

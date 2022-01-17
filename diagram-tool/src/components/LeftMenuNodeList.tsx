@@ -1,3 +1,5 @@
+import React from "react"
+import * as SRD from "@projectstorm/react-diagrams"
 import {
   List,
   ListItem,
@@ -6,13 +8,13 @@ import {
   IconButton,
 } from "@mui/material"
 import { Square as SquareIcon, Delete as DeleteIcon } from "@mui/icons-material"
-import * as SRD from "@projectstorm/react-diagrams"
-import { NodeInfo } from "../Types"
-import React from "react"
+import { NodeInfoArray } from "../Types"
 
 export default function LeftMenuNodeList(params: {
   engine: SRD.DiagramEngine
-  nodes: NodeInfo
+  nodes: NodeInfoArray
+  setOpenDialog: (name: string) => void
+  onDeleteNode: (id: string) => void
   onSelectNode: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
@@ -38,9 +40,7 @@ export default function LeftMenuNodeList(params: {
 
               <IconButton
                 edge='end'
-                onClick={() => {
-                  console.log("delete me")
-                }}
+                onClick={() => params.onDeleteNode(node.id)}
               >
                 <DeleteIcon />
               </IconButton>

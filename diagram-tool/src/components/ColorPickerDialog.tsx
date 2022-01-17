@@ -1,4 +1,3 @@
-import { useState } from "react"
 import ColorPicker, { themes } from "react-pick-color";
 
 export default function ColorPickerDialog(params: {

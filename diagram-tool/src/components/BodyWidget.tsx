@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
+import * as _ from "lodash"
 import * as SRD from "@projectstorm/react-diagrams"
 import { CanvasWidget } from "@projectstorm/react-canvas-core"
 import Grid from "@mui/material/Grid"
 import Application from "../Application"
 import LeftMenu from "./LeftMenu"
-import { NodeInfo, NodeTypes } from "../Types"
-import NodeDialog from "./NodeDialog"
+import NodeCreateDialog from "./NodeCreateDialog"
+import { NodeInfoArray, NodeTypes } from "../Types"
 
 export const BodyWidget = (params: { app: Application }) => {
   let diagramEngine = params.app.getDiagramEngine()
 
-  const [nodes, setNodes] = useState<NodeInfo>([])
+  const [nodes, setNodes] = useState<NodeInfoArray>([])
   const [openDialogName, setOpenDialog] = useState(null)
   const [selectedNodeIndex, setSelectedNodeIndex] = useState(undefined)
 
@@ -33,8 +34,7 @@ export const BodyWidget = (params: { app: Application }) => {
     const currentNodeInfo = nodes[selectedNodeIndex]
 
     if (currentNodeInfo !== undefined) {
-      console.log(currentNodeInfo)
-
+      //console.log(currentNodeInfo)
       let curModel = diagramEngine.getModel()
 
       let newNode = new SRD.DefaultNodeModel(
@@ -54,13 +54,45 @@ export const BodyWidget = (params: { app: Application }) => {
     }
   }
 
+  const deleteNode = (id: string) => {
+    let curModel = diagramEngine.getModel()
+    let curNodes = curModel.getNodes()
+
+    let foundNode = nodes.find((node) => node.id === id)
+
+    if (foundNode !== undefined) {
+      setNodes(
+        nodes.filter((node) => {
+          return node.id !== id
+        })
+      )
+
+      _.forEach(curNodes, (model: SRD.NodeModel) => {
+        let nodeOptions = model.getOptions()
+        let curNodeName = nodeOptions["name"]
+        let curNodeColor = nodeOptions["color"]
+
+        if (!model.isLocked()) {
+          if (
+            curNodeName === foundNode.name &&
+            curNodeColor === foundNode.color
+          ) {
+            model.remove()
+          }
+        }
+      })
+
+      diagramEngine.repaintCanvas()
+    }
+  }
+
   // Load from engine
   useEffect(() => {
     const getNodesFromEngine = () => {
       let currentModel = diagramEngine.getModel()
       let modelNodes = currentModel.getNodes()
 
-      let newNodes: NodeInfo = modelNodes.map((node) => {
+      let newNodes: NodeInfoArray = modelNodes.map((node) => {
         let options = node.getOptions()
         let ports = node.getPorts()
 
@@ -93,6 +125,7 @@ export const BodyWidget = (params: { app: Application }) => {
             engine={diagramEngine}
             nodes={nodes}
             setOpenDialog={setOpenDialog}
+            onDeleteNode={deleteNode}
             onSelectNode={handleListItemClick}
             selectedNodeIndex={selectedNodeIndex}
           />
@@ -110,7 +143,7 @@ export const BodyWidget = (params: { app: Application }) => {
       </Grid>
 
       {/* Put additional dialogs here */}
-      <NodeDialog
+      <NodeCreateDialog
         isOpen={openDialogName === "NODE"}
         onClose={() => setOpenDialog(null)}
         nodes={nodes}
